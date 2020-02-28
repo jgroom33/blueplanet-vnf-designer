@@ -6,7 +6,6 @@ vnf:        {{vnf}}
 version:    {{version}}
 tenant:
   name:          "{{tenant.name}}"
-  prefix:        "{{tenant.prefix}}"
   auth:
     username:    "{{tenant.auth.username}}"
     password:    "{{tenant.auth.password}}"
@@ -134,12 +133,14 @@ templates['Communication Matrix'] = `From                |Network |To           
 templates['VNFds'] = `
 [{% for component in components %}
 {
-  "vnfProductInfoName": "Training FortiGate VNF",
+  "vnfProductInfoName": "TODO: Training FortiGate VNF",
   "vnfdId": "{{component.name}}",
-  "exportedModelVersion": "0.0.0",
+  "exportedModelVersion": "{{component.version}}",
   "vnfdOperationalState": "ENABLED",
-  "vnfdProductName": "Training FortiOS VNF",
-  "vnfSoftwareVersion": "1.0",
+  "vnfdProductName": "TODO: Training FortiOS VNF",
+  "vnfSoftwareVersion": "TODO: 1.0",
+  "vnfdVersion": "TODO: 1.0",
+  "vnfProvider": "TODO: Fortinet",
   "vdus": [
     {
       "intCpd": [
@@ -149,8 +150,8 @@ templates['VNFds'] = `
       ],
       "vduId": "{{ component.name }}_base_vdu",
       "virtualComputeDesc": "{{ component.name }}_base",
-      "name": "FortiOS Small VDU",
-      "swImageDesc": "fortios_qcow2"
+      "name": "{{ component.name }} Base VDU",
+      "swImageDesc": "{{ component.image }}"
     }
   ],
   "virtualComputeDescs": [
@@ -175,7 +176,6 @@ templates['VNFds'] = `
   "softwareImages": [
     "fortios_qcow2"
   ],
-  "vnfProvider": "Fortinet",
   "instantiationLevels": [
     {
       "levelId": "base_level_1",
@@ -196,7 +196,6 @@ templates['VNFds'] = `
       }
     }{{ "," if not loop.last }}{% endfor %}
   ],
-  "vnfdVersion": "1.0",
   "intCpds": [{% for network in networks %}
     {
       "cpd": {
@@ -215,7 +214,7 @@ templates['VNFds'] = `
           "scalingByMoreThanOneStepSupported": false
         }
       },
-      "flavourId": "small",
+      "flavourId": "base",
       "instantiationLevel": [
         "base_level_1"
       ]

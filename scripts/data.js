@@ -5,7 +5,6 @@ vnf:        demo
 version:    1.0.0
 tenant:
   name:          "demo"
-  prefix:        ""
   auth:
     username:    "admin"
     password:    "adminpw"

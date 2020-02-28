@@ -21,8 +21,6 @@ var schema = {
       "required":    ["name","auth"],
       "properties": {
         "name":   { "type": "string", "description": "name of the tenant" },
-        "prefix": { "type": "string", "description": "prefix for tenant resources" },
-
         "auth": {
           "description": "The authentication information",
           "type":        "object",
