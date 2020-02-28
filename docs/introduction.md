@@ -17,9 +17,8 @@ The VNF Designer itself is a simple web-application which can either be used as 
 It is capable of:
 - **modelling** the networks, components (incl. images and flavors), volumes and ports of VNFs,
 - **validating** the model design,
-- **comparing** differences between two models (current state and target state),
 - **importing** and exporting models,
-- **generating** automation artefacts for deploying VNFs onto OpenStack clouds,
+- **generating** automation artefacts for deploying VNFs onto Blue Planet,
 - **documenting** required information such as the communication matrix of a VNF.
 
 It makes use of an internal canonical model which can be rendered with the help of jinja like templates into any kind of desired output. These rendering capabilities can be extended by adding new templates.

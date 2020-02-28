@@ -32,14 +32,6 @@ Vue.component( 'appheader',
           default:
         }
       },
-      toggleState: function() {
-
-        var detail = document.getElementById('appdetail')
-        detail.style.left = null
-        var tabs = document.getElementById('apptabs')
-        tabs.style.display = null
-        setContext('Tenant')
-      },
       add: function() {
         if ( view.navigation === "Flavor" )    { addFlavor(); }
         if ( view.navigation === "Image" )     { addImage(); }
@@ -111,9 +103,6 @@ Vue.component( 'appheader',
           </div>
           <div v-on:click="context('Docs')" title="Documentation" v-if="window.location.hostname!=''">
             <i class="fas fa-book"/>&nbsp;Docs
-          </div>
-          <div class="state" v-on:click="toggleState" title="Toggle between current and target state">
-            &nbsp;<i class="fas fa-adjust"/>&nbsp; State: {{view.mode}}
           </div>
         </div>
         <div id="apptabs" class="tabs">
