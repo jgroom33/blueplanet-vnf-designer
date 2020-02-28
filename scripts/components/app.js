@@ -3,14 +3,6 @@ Vue.component( 'appheader',
     props:    ['model','view'],
     computed: {
       title: function() {
-        switch(view.detail) {
-          case "Monitoring":
-            return "Monitoring: " + this.model.vnf + " (" + this.model.version + ")"
-          case "Delta":
-            return "Comparison: " + current.vnf + " (" + current.version + ")" +
-                   " versus "     + target.vnf  + " (" + target.version  + ")"
-        }
-
         return (view.mode === 'current' ? "Current state: " : "Target state: ") +
                this.model.vnf + " (" + this.model.version + ")"
       }
@@ -28,22 +20,11 @@ Vue.component( 'appheader',
         view.detail       = "Tenant"
 
         switch(ctxt) {
-          case "Monitoring":
-            view.detail = "Monitoring"
-            detail.style.left = "0px"
-            tabs.style.display = "none"
-            this.$emit("monitor")
-            break
           case "Import":
             view.detail = "Import"
             break
           case "Export":
             view.detail = "Export"
-            break
-          case "Delta":
-            view.detail = "Delta"
-            detail.style.left = "0px"
-            tabs.style.display = "none"
             break
           case "Docs":
             var win = window.open("/docs/index.html", '_blank');
@@ -127,9 +108,6 @@ Vue.component( 'appheader',
           <div v-on:click="context('Tenant')" title="Tenant overview">
             <i class="fas fa-map"/>&nbsp;Overview
           </div>
-          <div v-on:click="context('Monitoring')" title="Monitoring overview" v-if="window.location.hostname!=''">
-            <i class="fas fa-heartbeat"/>&nbsp;Monitoring
-          </div>
           <div v-on:click="reset" title="Reset model">
             <i class="fas fa-certificate"/>&nbsp;Reset
           </div>
@@ -141,9 +119,6 @@ Vue.component( 'appheader',
           </div>
           <div v-on:click="context('Export')" title="Export model">
             <i class="fas fa-arrow-alt-circle-up"/>&nbsp;Export
-          </div>
-          <div v-on:click="context('Delta')" title="Compare current and target state">
-            <i class="fas fa-arrow-circle-right "/>&nbsp;Compare
           </div>
           <div v-on:click="context('Docs')" title="Documentation" v-if="window.location.hostname!=''">
             <i class="fas fa-book"/>&nbsp;Docs
@@ -158,37 +133,36 @@ Vue.component( 'appheader',
             <div v-on:click="context('Flavor')">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div v-on:click="context('Network')">Networks</div>
-            <div v-on:click="context('Component')">Components</div>
+            <div v-on:click="context('Component')">VNFd's</div>
           </template>
           <template v-if="view.navigation === 'Image'">
             <div v-on:click="context('Tenant')">General</div>
             <div v-on:click="context('Flavor')">Flavors</div>
             <div class="active">Images</div>
             <div v-on:click="context('Network')">Networks</div>
-            <div v-on:click="context('Component')">Components</div>
+            <div v-on:click="context('Component')">VNFd's</div>
           </template>
           <template v-if="view.navigation === 'Flavor'">
             <div v-on:click="context('Tenant')">General</div>
             <div class="active">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div v-on:click="context('Network')">Networks</div>
-            <div v-on:click="context('Component')">Components</div>
+            <div v-on:click="context('Component')">VNFd's</div>
           </template>
           <template v-if="view.navigation === 'Network'">
             <div v-on:click="context('Tenant')">General</div>
             <div v-on:click="context('Flavor')">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div class="active">Networks</div>
-            <div v-on:click="context('Component')">Components</div>
+            <div v-on:click="context('Component')">VNFd's</div>
           </template>
           <template v-if="view.navigation === 'Component'">
             <div v-on:click="context('Tenant')">General</div>
             <div v-on:click="context('Flavor')">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div v-on:click="context('Network')">Networks</div>
-            <div class="active">Components</div>
+            <div class="active">VNFd's</div>
           </template>
-          <div class="button" v-if="view.navigation!='Tenant' && view.navigation!='Delta' && view.navigation!='Monitoring'" v-on:click="add"><i class="fas fa-plus"/></div>
         </div>
       </div>`
   }
@@ -271,23 +245,11 @@ Vue.component( 'appdetail',
           v-bind:model="model"
           v-bind:view="view">
         </importform>
-        <deltaform
-          v-if="view.detail === 'Delta'"
-          v-bind:model="model"
-          v-bind:current="current"
-          v-bind:target="target"
-          v-bind:view="view">
-        </deltaform>
         <tenant
           v-if="view.detail === 'Tenant'"
           v-bind:model="model"
           v-bind:view="view">
         </tenant>
-        <monitoring
-          v-if="view.detail === 'Monitoring'"
-          v-bind:model="model"
-          v-bind:view="view">
-        </monitoring>
       </div>`
   }
 )

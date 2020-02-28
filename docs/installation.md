@@ -4,7 +4,7 @@ Installation
 There are two installation options available:
 
 1. **Offline Webpage**: VNF Designer can be started as offline webpage allowing to directly start working without having to install anything apart from a modern web browser
-2. **Web-Server**: installing the VNF Designer as a web service allows to make use of additional features (e.g. monitoring and online documentation)
+2. **Web-Server**: installing the VNF Designer as a web service allows to make use of additional features
 
 -----
 
@@ -24,14 +24,13 @@ Installing the VNF Designer requires fulfilling a set of prerequisites and ideal
 
 - **node.js and npm** need to be installed (https://nodejs.org/en/download/)
 - **nodeenv** has been installed (optional - if a virtual node environment is needed: https://github.com/ekalinin/nodeenv)
-- **OpenStack API**: access to OpenStack APIs (directly or via http/s_proxy settings)
 
 __Steps:__
 
 **A. Repository**: Clone and unpack the repository from github (https://github.com/BernardTsai/vnf-designer) into a local directory and change into it's root directory:
 
-```
-git clone https://github.com/BernardTsai/vnf-designer    
+```bash
+git clone https://github.com/BernardTsai/vnf-designer
 cd vnf-designer
 ```
 

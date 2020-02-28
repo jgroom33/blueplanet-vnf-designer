@@ -17,20 +17,7 @@ The web-form for the tenant will be presented in the selector region on the left
 * specify the name of the tenant,
 * specify the username for accessing the tenant,
 * specify the password for accessing the tenant,
-* specify the API proxy,
-* specify the URL for accessing the OpenStack API,
-* specify the URL for the CERT file for the OpenStack API,
-* specify the region of the tenant,
-* specify the volume API version of the tenant,
-* specify Plug-In information,
-* specify service network parameters:
-  * CIDR,
-  * IP gateway,
-  * proxy IP address and
-  * proxy port,
-* specify the public address of a jumphost,
-* specify http proxy settings for accessing the OpenStack API and
-* specify https proxy settings for accessing the OpenStack API.
+* specify the URL for accessing the Blue Planet API,
 
 -----
 
