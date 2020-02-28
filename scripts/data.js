@@ -90,22 +90,6 @@ networks:
     import:    ""
     special:   ""
 components:
-  - uuid:         "f76afc3d-b19d-4f67-ab56-f7261501b5c4"
-    name:         "user"
-    user:         "root"
-    placement:    "OTHER"
-    flavor:       "none"
-    image:        "none"
-    min:          1
-    size:         1
-    max:          1
-    volumes:      []
-    interfaces:
-      - { network: "pub", attributes: "" }
-    services:     []
-    dependencies:
-      - { component: "firewall", service: "https", network: "pub" }
-    userdata:     ""
 
   - uuid:         "9572cd15-0c75-43f2-ad28-7031f172132f"
     name:         "firewall"
@@ -125,11 +109,11 @@ components:
       - { name: "ssh", network: "pub", protocol: "tcp", range: "22" }
       - { name: "https", network: "pub", protocol: "tcp", range: "443" }
     dependencies:
-      - { component: "application", service: "https", network: "ext" }
+      - { component: "sd-wan", service: "https", network: "ext" }
     userdata:     ""
 
   - uuid:         "4972819c-7c64-4e26-a0a0-41d86d798773"
-    name:         "application"
+    name:         "sd-wan"
     user:         "root"
     placement:    "EXT"
     flavor:       "none"

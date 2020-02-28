@@ -134,6 +134,11 @@ templates['Communication Matrix'] = `From                |Network |To           
 templates['VNFds'] = `
 [{% for component in components %}
 {
+  "vnfProductInfoName": "Training FortiGate VNF",
+  "vnfdId": "{{component.name}}",
+  "exportedModelVersion": "0.0.0",
+  "vnfdOperationalState": "ENABLED",
+  "vnfdProductName": "Training FortiOS VNF",
   "vnfSoftwareVersion": "1.0",
   "vdus": [
     {
@@ -142,8 +147,8 @@ templates['VNFds'] = `
         "{{ network.name }}"{{ "," if not loop.last }}
         {% endfor %}
       ],
-      "vduId": "small_fortios_vdu",
-      "virtualComputeDesc": "fortios_small",
+      "vduId": "{{ component.name }}_base_vdu",
+      "virtualComputeDesc": "{{ component.name }}_base",
       "name": "FortiOS Small VDU",
       "swImageDesc": "fortios_qcow2"
     }
@@ -153,7 +158,7 @@ templates['VNFds'] = `
       "virtualMemory": {
         "virtualMemSize": 1024
       },
-      "virtualComputeDescId": "fortios_small",
+      "virtualComputeDescId": "{{ component.name }}_base",
       "virtualCpu": {
         "numVirtualCpu": 1
       }
@@ -162,9 +167,9 @@ templates['VNFds'] = `
   "vduProfiles": [
     {
       "minNumberOfInstances": {{component.min}},
-      "vduProfileId": "sm_fortios_vdu_profile",
+      "vduProfileId": "{{ component.name }}_base_vdu_profile",
       "maxNumberOfInstances": {{component.max}},
-      "vduId": "small_fortios_vdu"
+      "vduId": "{{ component.name }}_base_vdu"
     }
   ],
   "softwareImages": [
@@ -173,12 +178,12 @@ templates['VNFds'] = `
   "vnfProvider": "Fortinet",
   "instantiationLevels": [
     {
-      "levelId": "sm_level_1",
+      "levelId": "base_level_1",
       "vduLevel": [
         {
-          "vduLevelId": "sm_vdu_level_1",
+          "vduLevelId": "base_vdu_level_1",
           "numberOfInstances": 1,
-          "vduId": "small_fortios_vdu"
+          "vduId": "{{ component.name }}_base_vdu"
         }
       ]
     }
@@ -199,13 +204,12 @@ templates['VNFds'] = `
       }
     }{{ "," if not loop.last }}{% endfor %}
   ],
-  "vnfProductInfoName": "Training FortiGate VNF",
   "deploymentFlavors": [
     {
       "vduProfile": [
-        "sm_fortios_vdu_profile"
+        "{{ component.name }}_base_vdu_profile"
       ],
-      "defaultInstantiationLevel": "sm_level_1",
+      "defaultInstantiationLevel": "base_level_1",
       "vnfLcmOperationsConfiguration": {
         "scaleVnfOpConfig": {
           "scalingByMoreThanOneStepSupported": false
@@ -213,14 +217,10 @@ templates['VNFds'] = `
       },
       "flavourId": "small",
       "instantiationLevel": [
-        "sm_level_1"
+        "base_level_1"
       ]
     }
-  ],
-  "vnfdId": "{{component.name}}",
-  "exportedModelVersion": "0.0.0",
-  "vnfdOperationalState": "ENABLED",
-  "vnfdProductName": "Training FortiOS VNF"
+  ]
 }{{ "," if not loop.last }}
 {% endfor %}
 ]
