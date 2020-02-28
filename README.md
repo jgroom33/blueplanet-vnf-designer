@@ -1,6 +1,7 @@
 # vnf-designer
 
 A simple webpage capable of:
+
 - modelling the networks, components (incl. images and flavors) and ports of VNFs,
 - validating the model design,
 - comparing differences between two models (current state and target state),
@@ -16,19 +17,16 @@ A model of a demo solution is provided as an example.
 
 For further questions please contact: bernard@tsai.eu
 
-# Quick start
+## Prerequisites
 
-Prerequisites
--------------
 - node.js and npm have been installed
 - nodeenv has been installed (optional - if a virtual node environment is needed)
 
-Steps
------
-- Clone the repository from github (https://github.com/BernardTsai/vnf-designer)
-- Change into the root directory
-- Create virtual node environment via "nodeenv --force ." (optional)
-- Start virtual node environment via "source bin/activate" (optional)
-- Install missing dependencies via "npm install"
-- Start server via "node index.js"
-- Open following url in a  browser: "http://localhost:3000"
+### Steps
+
+```bash
+npm install
+node index.js
+```
+
+open [http://localhost:3000](http://localhost:3000)
