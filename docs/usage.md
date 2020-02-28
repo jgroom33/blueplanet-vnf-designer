@@ -9,7 +9,7 @@ The following process allows such a DevOps team to design virtualised network fu
 3. **[Flavors](flavors.md)**: Define the dimensions of the virtual machines.
 3. **[Images](images.md)**: Define the required operating systems possibly including application specific packages and configurations.
 4. **[Networks](networks.md)**: Define the details of each network.
-5. **[Components](components.md)**: Define the details of each component.
+5. **[VNFd's](components.md)**: Define the details of each component.
 6. **[Tenant](tenant.md)**: Define the credentials to access the OpenStack API.
 7. **[Validation](validation.md)**: Validate the design.
 8. **[Artefacts](artefacts.md)**: Generate and download the automation artefacts.
@@ -18,8 +18,6 @@ The VNF Designer provides following additional functionality:
 
 * **[Import](import.md)** model,
 * **[Export](export.md)** model,
-* **[Compare](compare.md)** models and
-* **[Monitoring](monitoring.md)** a deployment.
 
 -----
 

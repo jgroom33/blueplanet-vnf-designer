@@ -12,7 +12,7 @@ The VNF Designer supports an opinionated view of how to consistently and efficie
 * **IP-Based Communication**: The communication between all internal and external elements is based on the layer 3 internet protocol.
 * **Dependency Management**: The dependencies between internal and external elements to the exposed services allows to derive the required communication matrix.
 
-The VNF Designer itself is a simple web-application which can either be used as offline webpage (offline.html) or as web-server allowing for additional capabilities e.g. monitoring.
+The VNF Designer itself is a simple web-application which can either be used as offline webpage (offline.html) or as web-server allowing for additional capabilities
 
 It is capable of:
 - **modelling** the networks, components (incl. images and flavors), volumes and ports of VNFs,
@@ -20,7 +20,6 @@ It is capable of:
 - **comparing** differences between two models (current state and target state),
 - **importing** and exporting models,
 - **generating** automation artefacts for deploying VNFs onto OpenStack clouds,
-- **monitoring** the status of a deployment and
 - **documenting** required information such as the communication matrix of a VNF.
 
 It makes use of an internal canonical model which can be rendered with the help of jinja like templates into any kind of desired output. These rendering capabilities can be extended by adding new templates.

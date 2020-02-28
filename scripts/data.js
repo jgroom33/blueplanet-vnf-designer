@@ -7,24 +7,9 @@ tenant:
   name:          "demo"
   prefix:        ""
   auth:
-    username:    "demo"
-    password:    "S3CR3T"
-    proxy:       ""
-    url:         ""
-    cert:        ""
-    region:      ""
-    vol_api:     ""
-    plugin:      ""
-  service:
-    network:     ""
-    cidr:        ""
-    gateway:     ""
-    proxy:       ""
-    port:        ""
-  jumphost:      ""
-  proxy:
-    http:        ""
-    https:       ""
+    username:    "admin"
+    password:    "adminpw"
+    url:         "https://10.10.10.10"
 flavors:
   - uuid:    "08e88f71-8916-428e-ae2e-e37b50619405"
     name:    "none"
@@ -184,21 +169,4 @@ components:
     dependencies:
       - { component: "database", service: "replication", network: "int" }
     userdata:     ""
-
-  - uuid:         "b2b214b6-37b5-4f4d-8706-8ca590b14a38"
-    name:         "devops"
-    placement:    "OTHER"
-    flavor:       "none"
-    image:        "none"
-    min:          1
-    size:         1
-    max:          1
-    volumes:      []
-    interfaces:
-      - { network: "pub", attributes: "" }
-    services:     []
-    dependencies:
-      - { component: "firewall", service: "ssh", network: "pub" }
-    userdata:     ""
-
 `

@@ -22,7 +22,6 @@ Prerequisites
 -------------
 - node.js and npm have been installed
 - nodeenv has been installed (optional - if a virtual node environment is needed)
-- access to OpenStack APIs (directly or via http/s_proxy settings)
 
 Steps
 -----
