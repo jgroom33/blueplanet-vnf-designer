@@ -132,23 +132,8 @@ function emptyModel() {
       auth: {
         username:    "",
         password:    "",
-        proxy:       "",
-        url:         "",
-        cert:        "",
-        region:      "",
-        vol_api:     "",
-        plugin:      ""
-      },
-      service: {
-        network:     "",
-        cidr:        "",
-        gateway:     ""
-      },
-      proxy: {
-        address:     "",
-        port:        ""
-      },
-      jumphost:      ""
+        url:         ""
+      }
     },
     flavors:    [],
     images:     [],

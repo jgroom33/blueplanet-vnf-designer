@@ -3,8 +3,7 @@ Vue.component( 'appheader',
     props:    ['model','view'],
     computed: {
       title: function() {
-        return (view.mode === 'current' ? "Current state: " : "Target state: ") +
-               this.model.vnf + " (" + this.model.version + ")"
+        return this.model.vnf + " (" + this.model.version + ")"
       }
     },
     methods: {
@@ -35,16 +34,6 @@ Vue.component( 'appheader',
       },
       toggleState: function() {
 
-        if (view.mode === 'current')
-        {
-          current = JSON.parse(JSON.stringify(model));
-          view.mode='target'
-          setModel(target)
-        } else if (view.mode === 'target') {
-          target = JSON.parse(JSON.stringify(model));
-          view.mode='current'
-          setModel(current)
-        }
         var detail = document.getElementById('appdetail')
         detail.style.left = null
         var tabs = document.getElementById('apptabs')

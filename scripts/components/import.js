@@ -57,17 +57,6 @@ Vue.component(
           return
         }
 
-        // augment possibly undefined service
-        if (!object.tenant.service) {
-          object.tenant.service = {
-            "network":  "",
-            "cidr":     "",
-            "gateway":  "",
-            "proxy":    "",
-            "port":     ""
-          }
-        }
-
         // copy data to model
         if (this.view.mode == "current")
         {

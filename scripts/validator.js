@@ -26,49 +26,11 @@ var schema = {
         "auth": {
           "description": "The authentication information",
           "type":        "object",
-          "required":    ["username","password","proxy","url","cert","region","vol_api","plugin"],
+          "required":    ["username","password","url"],
           "properties": {
             "username": { "type": "string", "description": "username for accessing the API" },
             "password": { "type": "string", "description": "password for accessing the API" },
-            "proxy":    { "type": "string", "description": "url for API proxy" },
-            "url":      { "type": "string", "description": "url for the API" },
-            "cert":     { "type": "string", "description": "location of certificate file" },
-            "region":   { "type": "string", "description": "region of tenant" },
-            "vol_api":  { "type": "string", "description": "version of volume API" },
-            "plugin":   { "type": "string", "description": "authentication plugin" }
-          }
-        },
-
-        "service": {
-          "description": "The parameters of the service network",
-          "type":        "object",
-          "required":    ["network","cidr","gateway","proxy","port"],
-          "properties": {
-            "network":  { "type": "string", "description": "name of the service network" },
-            "cidr":     { "type": "string", "description": "cidr of the service network" },
-            "gateway":  { anyOf:
-                          [{ "type": "string", "description": "gateway ip address", "format": "ipv4"  },
-                           { "const": ""  }]
-                        },
-            "proxy":    { anyOf:
-                          [{ "type": "string", "description": "proxy ip address", "format": "ipv4"  },
-                           { "const": ""  }]
-                        },
-            "port":     { "type": "string", "description": "proxy port number" }
-          }
-        },
-
-        "jumphost": { anyOf:
-                      [{ "type": "string", "description": "jumphost ip address", "format": "ipv4"  },
-                       { "const": ""  }]
-                    },
-
-        "proxy": {
-          "description": "The parameters of the http proxy",
-          "type":        "object",
-          "properties": {
-            "http":     { "type": "string", "description": "url for http proxy" },
-            "https":    { "type": "string", "description": "url for https proxy" }
+            "url":      { "type": "string", "description": "url for the API" }
           }
         }
       }
