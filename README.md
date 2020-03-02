@@ -9,7 +9,7 @@ A simple webpage capable of:
 - importing and exporting models,
 - generating artefacts for deploying VNFd's and NSd's onto Blue Planet
 
-For further questions please contact: jgreoom@ciena.com
+For further questions please contact: jgroom@ciena.com
 
 ## Prerequisites
 
