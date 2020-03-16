@@ -19,7 +19,5 @@ For further questions please contact: jgroom@ciena.com
 
 ```bash
 npm install
-node index.js
+npm run serve
 ```
-
-open [http://localhost:3000](http://localhost:3000)
