@@ -8,11 +8,11 @@
 </template>
 <script>
 export default {
-  name: 'modal',
+  name: "modal",
   props: ["view"],
   computed: {
     html: function() {
-      var lines = view.modal.split("\n");
+      var lines = this.view.modal.split("\n");
       var title = "<h2>" + lines[0] + "</h2>";
       var msgs = "";
 
@@ -36,9 +36,9 @@ export default {
   },
   methods: {
     close: function() {
-      view.modal = "";
-      if (view.field) {
-        var el = document.getElementById(view.field);
+      this.view.modal = "";
+      if (this.view.field) {
+        var el = document.getElementById(this.view.field);
 
         if (el) {
           el.focus();

@@ -1,9 +1,7 @@
 <template>
   <div id="appheader" v-bind:class="view.mode">
-    <div class="logo">
-      <i class="fas fa-cloud" />&nbsp;VNF Designer
-    </div>
-    <div id="apptitle" class="label">{{title}}</div>
+    <div class="logo"><i class="fas fa-cloud" />&nbsp;VNF Designer</div>
+    <div id="apptitle" class="label">{{ title }}</div>
     <div id="appbuttons" class="buttons">
       <div v-on:click="context('Tenant')" title="Tenant overview">
         <i class="fas fa-map" />&nbsp;Overview
@@ -20,7 +18,11 @@
       <div v-on:click="context('Export')" title="Export model">
         <i class="fas fa-arrow-alt-circle-up" />&nbsp;Export
       </div>
-      <div v-on:click="context('Docs')" title="Documentation" v-if="window.location.hostname!=''">
+      <div
+        v-on:click="context('Docs')"
+        title="Documentation"
+        v-if="window.location.hostname != ''"
+      >
         <i class="fas fa-book" />&nbsp;Docs
       </div>
     </div>
@@ -65,35 +67,38 @@
 </template>
 
 <script>
-import setContext from "@/view.js"
-import setModel from "@/view.js"
-import view from "@/view.js"
-import emptyModel from "@/misc.js"
-import validate_xref from "@/validator.js"
-import validate_schema from "@/validator.js"
-import deleteComponent from "@/model.js"
-import deleteNetwork from "@/model.js"
-import deleteFlavor from "@/model.js"
-import deleteImage from "@/model.js"
-import addFlavor from "@/model.js"
-import addImage from "@/model.js"
-import addNetwork from "@/model.js"
-import addComponent from "@/model.js"
-import current from "@/model.js"
-import msg from "@/model.js"
-import model from "@/model.js"
+// import setContext from "@/view.js";
+// import setModel from "@/view.js";
+// import view from "@/view.js";
+// import misc from "@/misc.js";
+import validator from "@/validator.js";
+// import validate_schema from "@/validator.js";
+// import deleteComponent from "@/model.js";
+// import deleteNetwork from "@/model.js";
+// import deleteFlavor from "@/model.js";
+// import deleteImage from "@/model.js";
+// import addFlavor from "@/model.js";
+// import addImage from "@/model.js";
+// import addNetwork from "@/model.js";
+// import addComponent from "@/model.js";
+// import current from "@/model.js";
+// import msg from "@/model.js";
+// import model from "@/model.js";
 
 export default {
-  name: 'appheader',
-  props: ["model", "view"],
+  name: "appheader",
+  props: ["model", "view", "misc"],
   computed: {
     title: function() {
-      return this.model.vnf + " (" + this.model.version + ")";
+      return this.model.current.vnf + " (" + this.model.current.version + ")";
     }
   },
+  // created() {
+  //   console.log(this.view);
+  // },
   methods: {
     context: function(ctxt) {
-      setContext(ctxt);
+      this.view.setContext(ctxt);
 
       // resize appdetail to default values
       var detail = document.getElementById("appdetail");
@@ -101,14 +106,14 @@ export default {
       var tabs = document.getElementById("apptabs");
       tabs.style.display = null;
 
-      view.detail = "Tenant";
+      this.view.detail = "Tenant";
 
       switch (ctxt) {
         case "Import":
-          view.detail = "Import";
+          this.view.detail = "Import";
           break;
         case "Export":
-          view.detail = "Export";
+          this.view.detail = "Export";
           break;
         case "Docs":
           var win = window.open("/docs/index.html", "_blank");
@@ -117,60 +122,60 @@ export default {
         default:
       }
     },
-    add: function() {
-      if (view.navigation === "Flavor") {
-        addFlavor();
-      }
-      if (view.navigation === "Image") {
-        addImage();
-      }
-      if (view.navigation === "Network") {
-        addNetwork();
-      }
-      if (view.navigation === "Component") {
-        addComponent();
-      }
-    },
-    del: function() {
-      if (view.navigation === "Flavor") {
-        deleteFlavor();
-      }
-      if (view.navigation === "Image") {
-        deleteImage();
-      }
-      if (view.navigation === "Network") {
-        deleteNetwork();
-      }
-      if (view.navigation === "Component") {
-        deleteComponent();
-      }
-    },
+    // add: function() {
+    //   if (view.navigation === "Flavor") {
+    //     model.addFlavor();
+    //   }
+    //   if (view.navigation === "Image") {
+    //     model.addImage();
+    //   }
+    //   if (view.navigation === "Network") {
+    //     model.addNetwork();
+    //   }
+    //   if (view.navigation === "Component") {
+    //     model.addComponent();
+    //   }
+    // },
+    // del: function() {
+    //   if (view.navigation === "Flavor") {
+    //     model.deleteFlavor();
+    //   }
+    //   if (view.navigation === "Image") {
+    //     model.deleteImage();
+    //   }
+    //   if (view.navigation === "Network") {
+    //     model.deleteNetwork();
+    //   }
+    //   if (view.navigation === "Component") {
+    //     model.deleteComponent();
+    //   }
+    // },
     validate: function() {
-      var object = JSON.parse(JSON.stringify(model));
+      var object = JSON.parse(JSON.stringify(this.model.current));
 
       // verify schema
-      msg = validate_schema(object);
+      var msg = validator.validate_schema(object);
       if (msg != "") {
-        view.modal = msg;
+        this.view.modal = msg;
         return;
       }
 
       // verify xrefs
-      msg = validate_xref(object);
+      msg = validator.validate_xref(object);
       if (msg != "") {
-        view.modal = msg;
+        this.view.modal = msg;
         return;
       }
 
       // everything is fine
-      view.modal = "No Validation Errors";
+      this.view.modal = "No Validation Errors";
     },
     reset: function() {
-      current = JSON.parse(JSON.stringify(emptyModel()));
-      view.mode = "current";
-      setModel(current);
-      setContext("Tenant");
-      // this.$forceUpdate();
+      var current = JSON.parse(JSON.stringify(this.misc.emptyModel()));
+      this.view.mode = "current";
+      this.model.setModel(current);
+      this.view.setContext("Tenant");
+      this.$forceUpdate(); // whats this?
     }
   }
 };
