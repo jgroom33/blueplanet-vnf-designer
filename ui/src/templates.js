@@ -1,6 +1,6 @@
-var templates = {}
+var templates = {};
 
-templates['Canonical'] = `---
+templates["Canonical"] = `---
 schema:     {{schema}}
 vnf:        {{vnf}}
 version:    {{version}}
@@ -115,22 +115,24 @@ components:
 {% endif -%}
 
 {% endfor %}
-`
+`;
 
 //------------------------------------------------------------------------------
 
-templates['Communication Matrix'] = `From                |Network |To                  |Service   |Protocol|Port (range)    |Network
+templates[
+  "Communication Matrix"
+] = `From                |Network |To                  |Service   |Protocol|Port (range)    |Network
 {% for component1 in components %}{% for dependency in component1.dependencies %}
 {% for component2 in components %}{% if component2.name == dependency.component %}
 {% for service in component2.services %}{% if service.name == dependency.service %}
 {{(component1.name    + '                    ') | truncate(20,false,'') }}|{{(dependency.network + '        ') | truncate(8,false,'') }}|{{(component2.name + '                    ') | truncate(20,false,'') }}|{{(service.name + '          ') | truncate(10,false,'') }}|{{(service.protocol + '        ') | truncate(8,false,'')  }}|{{(service.range      + '                ') | truncate(16,false,'') }}|{{(service.network    + '      ') | truncate(6,false,'')  }}
 {% endif %}{% endfor %}
 {% endif %}{% endfor %}
-{% endfor %}{% endfor %}`
+{% endfor %}{% endfor %}`;
 
 //------------------------------------------------------------------------------
 
-templates['VNFds'] = `
+templates["VNFds"] = `
 [{% for component in components %}
 {
   "vnfProductInfoName": "TODO: Training FortiGate VNF",
@@ -223,10 +225,12 @@ templates['VNFds'] = `
 }{{ "," if not loop.last }}
 {% endfor %}
 ]
-`
+`;
 
 //------------------------------------------------------------------------------
 
-templates['NSds'] = `{
+templates["NSds"] = `{
   "message": "placeholder for NSds generation"
-}`
+}`;
+
+export default templates;

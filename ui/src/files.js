@@ -1,6 +1,6 @@
-var files = {}
+var files = {};
 
-files['networks.tmpl'] = `---
+files["networks.tmpl"] = `---
 networks:
 {% for name in network_names %}
 {% set n = namespace(network='unknown',subnet='unknown',cidr='',gateway='',start='',end='') %}
@@ -21,11 +21,11 @@ networks:
     gateway: {{ n.gateway }}
     start:   {{ n.start }}
     end:     {{ n.end }}
-{% endfor %}`
+{% endfor %}`;
 
 //------------------------------------------------------------------------------
 
-files['servers.tmpl'] = `---
+files["servers.tmpl"] = `---
 {% set n = namespace(server_found=false,port_found=false) %}
 servers:
 {% for server_name in server_names %}
@@ -53,22 +53,22 @@ servers:
 {% endif %}
 {% endif %}{% endfor %}
 {% endfor %}
-`
+`;
 
 //------------------------------------------------------------------------------
 
-files['ansible.cfg'] = `
+files["ansible.cfg"] = `
 [defaults]
 inventory       = ./output/inventory
 stdout_callback = yaml
 
 [ssh_connection]
 ssh_args     = -F ./output/config
-control_path = ./mux-%r@%h:%p`
+control_path = ./mux-%r@%h:%p`;
 
 //------------------------------------------------------------------------------
 
-files['inventory'] = `localhost ansible_connection=local
+files["inventory"] = `localhost ansible_connection=local
 
 [servers]
 {% for server_name in server_names %}
@@ -78,15 +78,15 @@ files['inventory'] = `localhost ansible_connection=local
 [ssh_servers]
 {% for server_name in ssh_server_names %}
 {{server_name}}
-{% endfor %}`
+{% endfor %}`;
 
 //------------------------------------------------------------------------------
 
-files['default_inventory'] = `localhost ansible_connection=local `
+files["default_inventory"] = `localhost ansible_connection=local `;
 
 //------------------------------------------------------------------------------
 
-files['setup'] = `#!/usr/bin/env bash
+files["setup"] = `#!/usr/bin/env bash
 
 ROOT="."
 
@@ -98,11 +98,11 @@ if [ -f "$ROOT/setup.sh" ]; then
   find  $ROOT/router  -name '*.yml' -type f | xargs chmod a+x
 else
   echo "Script should be sourced within the same directory"
-fi`
+fi`;
 
 //------------------------------------------------------------------------------
 
-files['setup'] = `#!/usr/bin/env bash
+files["setup"] = `#!/usr/bin/env bash
 
 # This script has to be sourced in order to adjust the path
 if [[ $_ == $0 ]]
@@ -189,11 +189,11 @@ do
     echo "- $SCRIPT"
 done
 cd ..
-echo ""`
+echo ""`;
 
 //------------------------------------------------------------------------------
 
-files['infrastructure_authorize.sh'] = `#!/usr/bin/env bash
+files["infrastructure_authorize.sh"] = `#!/usr/bin/env bash
 
 set -e
 
@@ -226,11 +226,11 @@ wait
 echo ""
 
 echo "Completed"
-echo ""`
+echo ""`;
 
 //------------------------------------------------------------------------------
 
-files['infrastructure_connect.sh'] = `#!/usr/bin/env bash
+files["infrastructure_connect.sh"] = `#!/usr/bin/env bash
 
 set -e
 
@@ -266,11 +266,11 @@ if [ "$#" -ne 1 ]; then
 fi
 
 # Connect
-ssh -F output/config $1`
+ssh -F output/config $1`;
 
 //------------------------------------------------------------------------------
 
-files['infrastructure_create.sh'] = `#!/usr/bin/env bash
+files["infrastructure_create.sh"] = `#!/usr/bin/env bash
 
 # determine script path
 SCRIPTPATH="$( cd "$(dirname "$0")/../elements" ; pwd -P )"
@@ -313,11 +313,11 @@ wait
 echo ""
 
 echo "Completed"
-echo ""`
+echo ""`;
 
 //------------------------------------------------------------------------------
 
-files['infrastructure_delete.sh'] = `#!/usr/bin/env bash
+files["infrastructure_delete.sh"] = `#!/usr/bin/env bash
 
 # determine script path
 SCRIPTPATH="$( cd "$(dirname "$0")/../elements" ; pwd -P )"
@@ -360,11 +360,11 @@ $SCRIPTPATH/networks/delete.yml > /dev/null
 echo ""
 
 echo "Completed"
-echo ""`
+echo ""`;
 
 //------------------------------------------------------------------------------
 
-files['infrastructure_status.sh'] = `#!/usr/bin/env bash
+files["infrastructure_status.sh"] = `#!/usr/bin/env bash
 
 # determine script path
 SCRIPTPATH="$( cd "$(dirname "$0")/../elements" ; pwd -P )"
@@ -387,6 +387,7 @@ echo ""
 $SCRIPTPATH/servers/status.yml > /dev/null
 
 echo "Completed"
-echo ""`
+echo ""`;
 
 //------------------------------------------------------------------------------
+export default files;

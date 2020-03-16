@@ -152,4 +152,6 @@ components:
     dependencies:
       - { component: "database", service: "replication", network: "int" }
     userdata:     ""
-`
+`;
+
+export default data;

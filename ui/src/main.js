@@ -10,6 +10,7 @@ import Vue2Filters from "vue2-filters";
 
 Vue.use(Vue2Filters);
 UIkit.use(Icons);
+Vue.prototype.window = window; // added by subtillia
 window.UIkit = UIkit;
 
 // loads the Icon plugin
@@ -26,9 +27,19 @@ Vue.use(VueSnackbar, {});
 
 Vue.component("button-spinner", ButtonSpinner);
 
+import "@/styles/global.css";
+
+// new Vue({
+//   router,
+//   store,
+// mixins: [Vue2Filters.mixin],
+//   render: h => h(App)
+// }).$mount("#app");
 new Vue({
   router,
   store,
   mixins: [Vue2Filters.mixin],
-  render: h => h(App)
+  render: function(h) {
+    return h(App);
+  }
 }).$mount("#app");
