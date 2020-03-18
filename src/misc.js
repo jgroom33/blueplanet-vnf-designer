@@ -1,4 +1,6 @@
-import { MINIMAL_SCHEMA } from "js-yaml";
+// import { MINIMAL_SCHEMA } from "js-yaml";
+import nunjucks from "nunjucks";
+import templates from "./templates";
 
 var misc = {
   // fixed_ips_filter derives a list of fixed IPs from a string
@@ -11,28 +13,28 @@ var misc = {
     var result = [];
 
     // extract the fixed ips part of the string
-    str1 = str.match(pattern);
+    var str1 = str.match(pattern);
 
     if (!str1) {
       return result;
     }
 
     // get first occurence
-    str2 = str1[0];
+    var str2 = str1[0];
 
     // remove the prefix: "fixed: "
-    str3 = str2.substr(7);
+    var str3 = str2.substr(7);
 
     // split into substrings
-    str4 = str3.split(",");
+    var str4 = str3.split(",");
 
     // construct the result
-    for (str5 of str4) {
+    for (var str5 of str4) {
       // check if we have a range
       if (str5.indexOf("-") < 0) {
         result.push(str5);
       } else {
-        for (str6 of generate_ip_range(str5)) {
+        for (var str6 of this.generate_ip_range(str5)) {
           result.push(str6);
         }
       }
@@ -52,28 +54,28 @@ var misc = {
     var result = [];
 
     // extract the allowed ips part of the string
-    str1 = str.match(pattern);
+    var str1 = str.match(pattern);
 
     if (!str1) {
       return result;
     }
 
     // get first occurence
-    str2 = str1[0];
+    var str2 = str1[0];
 
     // remove the prefix: "allowed: "
-    str3 = str2.substr(9);
+    var str3 = str2.substr(9);
 
     // split into substrings
-    str4 = str3.split(",");
+    var str4 = str3.split(",");
 
     // construct the result
-    for (str5 of str4) {
+    for (var str5 of str4) {
       // check if we have a range
       if (str5.indexOf("-") < 0) {
         result.push(str5);
       } else {
-        for (str6 of generate_ip_range(str5)) {
+        for (var str6 of this.generate_ip_range(str5)) {
           result.push(str6);
         }
       }
@@ -87,7 +89,7 @@ var misc = {
   // format: "portmin-portmax|port"
   // e.g. 8080-8081
   port_min_filter(str) {
-    parts = str.split("-");
+    var parts = str.split("-");
 
     return parts.length == 2 ? parts[0] : str;
   },
@@ -96,7 +98,7 @@ var misc = {
   // format: "portmin-portmax|port"
   // e.g. 8080-8081
   port_max_filter(str) {
-    parts = str.split("-");
+    var parts = str.split("-");
 
     return parts.length == 2 ? parts[1] : str;
   },
@@ -106,14 +108,14 @@ var misc = {
     var result = [];
 
     // split range and determine prefix and range
-    pos = range.lastIndexOf(".");
-    prefix = range.substr(0, pos);
-    rng = range.substr(pos + 1);
+    var pos = range.lastIndexOf(".");
+    var prefix = range.substr(0, pos);
+    var rng = range.substr(pos + 1);
 
     // split the range and determine first and last index
-    parts = rng.split("-");
-    first = parseInt(parts[0], 10);
-    last = parseInt(parts[1], 10);
+    var parts = rng.split("-");
+    var first = parseInt(parts[0], 10);
+    var last = parseInt(parts[1], 10);
 
     // construct the result
     for (var index = first; index <= last; index++) {
@@ -149,10 +151,10 @@ var misc = {
     var tmpl = templates[template_name];
     var env = nunjucks.configure({ trimBlocks: true });
 
-    env.addFilter("fixed", fixed_ips_filter);
-    env.addFilter("allowed", allowed_ips_filter);
-    env.addFilter("portmin", port_min_filter);
-    env.addFilter("portmax", port_max_filter);
+    env.addFilter("fixed", this.fixed_ips_filter);
+    env.addFilter("allowed", this.allowed_ips_filter);
+    env.addFilter("portmin", this.port_min_filter);
+    env.addFilter("portmax", this.port_max_filter);
 
     return nunjucks.renderString(tmpl, model);
   },
@@ -168,7 +170,7 @@ var misc = {
 
     // loop over all lines
     for (const line of lines) {
-      seperator = line.match("----- .* -----");
+      var seperator = line.match("----- .* -----");
       if (seperator && seperator[0] == line) {
         // store current content
         if (filename != "" && content != "") {
