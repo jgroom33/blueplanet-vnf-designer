@@ -279,10 +279,10 @@ export default {
       var tmpl = this.templates[format];
       var env = nunjucks.configure({ trimBlocks: true });
 
-      env.addFilter("fixed", "fixed_ips_filter");
-      env.addFilter("allowed", "allowed_ips_filter");
-      env.addFilter("portmin", "port_min_filter");
-      env.addFilter("portmax", "port_max_filter");
+      env.addFilter("fixed", misc.fixed_ips_filter);
+      env.addFilter("allowed", misc.allowed_ips_filter);
+      env.addFilter("portmin", misc.port_min_filter);
+      env.addFilter("portmax", misc.port_max_filter);
 
       var result = nunjucks.renderString(tmpl, this.model);
 
