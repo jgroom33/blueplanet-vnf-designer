@@ -116,7 +116,7 @@ export default {
           this.view.detail = "Export";
           break;
         case "Docs":
-          var win = window.open("/docs/index.html", "_blank");
+          var win = window.open("/vnf-designer/docs", "_blank");
           win.focus();
           break;
         default:

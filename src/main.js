@@ -18,7 +18,6 @@ window._ = require("lodash");
 
 require("./styles/index.scss");
 require("vue-snack/dist/vue-snack.min.css");
-
 Vue.config.productionTip = false;
 
 window.Event = new Vue();
@@ -26,6 +25,14 @@ window.Event = new Vue();
 Vue.use(VueSnackbar, {});
 
 Vue.component("button-spinner", ButtonSpinner);
+
+import VueShowdown from "vue-showdown";
+
+Vue.use(VueShowdown, {
+  options: {
+    emoji: true
+  }
+});
 
 import "@/styles/global.css";
 
