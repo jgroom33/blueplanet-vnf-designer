@@ -10,11 +10,11 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    // {
-    //   path: "/index.html",
-    //   component: appComponent,
-    //   alias: "/"
-    // },
+    {
+      path: "/index.html",
+      component: appComponent,
+      alias: "/"
+    },
     {
       path: "/",
       component: appComponent
