@@ -284,7 +284,7 @@ export default {
       env.addFilter("portmin", misc.port_min_filter);
       env.addFilter("portmax", misc.port_max_filter);
 
-      var result = nunjucks.renderString(tmpl, this.model);
+      var result = nunjucks.renderString(tmpl, this.model.current);
 
       return result;
     }
