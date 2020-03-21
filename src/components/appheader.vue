@@ -18,13 +18,14 @@
       <div v-on:click="context('Export')" title="Export model">
         <i class="fas fa-arrow-alt-circle-up" />&nbsp;Export
       </div>
-      <div
-        v-on:click="context('Docs')"
-        title="Documentation"
-        v-if="window.location.hostname != ''"
-      >
-        <i class="fas fa-book" />&nbsp;Docs
+      <div title="Documentation">
+        <a target="_blank" href="/docs">
+          <i class="fas fa-book" />&nbsp;Docs
+        </a>
       </div>
+      <!-- <div v-on:click="context('Docs')" v-if="window.location.hostname != ''">
+        <i class="fas fa-book" />&nbsp;Docs
+      </div> -->
     </div>
     <div id="apptabs" class="tabs">
       <template v-if="view.navigation === 'Tenant'">
@@ -116,7 +117,7 @@ export default {
           this.view.detail = "Export";
           break;
         case "Docs":
-          var win = window.open("/vnf-designer/docs", "_blank");
+          var win = window.open("/docs", "_blank");
           win.focus();
           break;
         default:
