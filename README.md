@@ -1,7 +1,5 @@
 # vnf-designer
 
-[Webservice](https://jgroom33.github.io/vnf-designer/)
-
 A simple webpage capable of:
 
 - modelling the networks, components (incl. images and flavors) and ports of VNFs,

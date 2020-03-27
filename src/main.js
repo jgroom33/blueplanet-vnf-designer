@@ -36,17 +36,11 @@ Vue.use(VueShowdown, {
 
 import "@/styles/global.css";
 
-// new Vue({
-//   router,
-//   store,
-// mixins: [Vue2Filters.mixin],
-//   render: h => h(App)
-// }).$mount("#app");
 new Vue({
   router,
   store,
   mixins: [Vue2Filters.mixin],
-  render: function(h) {
+  render: function (h) {
     return h(App);
   }
 }).$mount("#app");
