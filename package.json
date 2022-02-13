@@ -21,7 +21,7 @@
         "test:unit": "vue-cli-service test:unit"
     },
     "dependencies": {
-        "ajv": "^6.12.0",
+        "ajv": "^6.12.3",
         "axios": "^0.21.2",
         "copy-to-clipboard": "^3.2.1",
         "core-js": "^3.6.4",
